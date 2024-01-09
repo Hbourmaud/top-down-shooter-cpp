@@ -137,12 +137,14 @@
     <None Include="..\..\vcpkg.json" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="bullet.cpp" />
     <ClCompile Include="gameManager.cpp" />
     <ClCompile Include="include\enemy.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="src\player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\bullet.h" />
     <ClInclude Include="include\enemy.h" />
     <ClInclude Include="include\gameManager.h" />
     <ClInclude Include="include\player.h" />

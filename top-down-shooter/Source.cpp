@@ -4,30 +4,45 @@
 #include "enemy.h"
 
 using namespace std;
-using namespace sf;
 
 int main(){
     GameManager gameManager;
-
-    sf::RenderWindow window(sf::VideoMode(gameManager.windowWidth, gameManager.windowHeight), "Top-down shooter");
-
 
     Player player{ gameManager.windowWidth / 2, gameManager.windowHeight - 50 };
 
     Enemy enemy{ gameManager.windowWidth / 3, gameManager.windowHeight / 2 };
 
-    while (window.isOpen())
+    if (!gameManager.window)
     {
-        window.clear(Color::Black);
+        return 1;
+    }
+
+    while (gameManager.window->isOpen())
+    {
+        gameManager.window->clear(Color::Black);
 
         if (Keyboard::isKeyPressed(Keyboard::Key::Escape)) break;
 
         player.update(gameManager);
 
-        window.draw(player.shape);
-        window.draw(enemy.shape);
+        gameManager.window->draw(player.shape);
+        gameManager.window->draw(enemy.shape);
 
-        window.display();
+        for (auto i = player.bullets.begin(); i != player.bullets.end();)
+        {
+            if ((*i).durationTolive <= gameManager.clock.getElapsedTime().asMilliseconds())
+            {
+                i = player.bullets.erase(i);
+            }
+            else
+            {
+                (*i).update(gameManager);
+                gameManager.window->draw((*i).shape);
+                ++i;
+            }
+        }
+
+        gameManager.window->display();
     }
     return 0;
 }
