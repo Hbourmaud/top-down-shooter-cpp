@@ -1,6 +1,7 @@
 #include <SFML/Graphics.hpp>
 #include "player.h"
 #include "gameManager.h"
+#include "enemy.h"
 
 using namespace std;
 using namespace sf;
@@ -13,6 +14,8 @@ int main(){
 
     Player player{ gameManager.windowWidth / 2, gameManager.windowHeight - 50 };
 
+    Enemy enemy{ gameManager.windowWidth / 3, gameManager.windowHeight / 2 };
+
     while (window.isOpen())
     {
         window.clear(Color::Black);
@@ -22,6 +25,7 @@ int main(){
         player.update(gameManager);
 
         window.draw(player.shape);
+        window.draw(enemy.shape);
 
         window.display();
     }

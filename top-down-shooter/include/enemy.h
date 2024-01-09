@@ -1,19 +1,16 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "gameManager.h"
 
 using namespace std;
 using namespace sf;
 
-class Player
+class Enemy
 {
 public:
-	Player(float mX, float mY);
+	Enemy(float mX, float mY);
+	float life{ 10.f }, enemyVelocity{ 0.5f }, enemyRadius{ 10.f };
 	CircleShape shape;
-	float playerRadius{ 10.f }, playerVelocity{ 0.75f }, life{10.f};
 	Vector2f velocity;
-
-	void update(GameManager gameManager);
 
 	float x();
 	float y();
@@ -23,4 +20,5 @@ public:
 	float bottom();
 
 private:
+
 };

@@ -138,10 +138,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gameManager.cpp" />
+    <ClCompile Include="include\enemy.cpp" />
     <ClCompile Include="Source.cpp" />
     <ClCompile Include="src\player.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\enemy.h" />
     <ClInclude Include="include\gameManager.h" />
     <ClInclude Include="include\player.h" />
   </ItemGroup>
