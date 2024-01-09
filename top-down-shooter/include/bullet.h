@@ -5,10 +5,10 @@
 class Bullet
 {
 public:
-	Bullet(float mX, float mY);
+	Bullet(float mX, float mY, float mouseAngle);
 	CircleShape shape;
-	float damage{ 5.f }, bulletRadius{ 5.f }, bulletVelocity{ 2.f }, durationTolive{ 0.f };
-	Vector2f velocity{-bulletVelocity, -bulletVelocity};
+	float damage{ 5.f }, bulletRadius{ 5.f }, bulletVelocity{ 5.f }, durationTolive{ 0.f };
+	Vector2f velocity;
 
 	void update(GameManager gameManager);
 

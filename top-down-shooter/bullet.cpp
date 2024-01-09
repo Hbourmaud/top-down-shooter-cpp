@@ -1,7 +1,8 @@
 #include "bullet.h"
 
-Bullet::Bullet(float mX, float mY)
+Bullet::Bullet(float mX, float mY, float mouseAngle)
 {
+    velocity = { bulletVelocity * cos(mouseAngle) , bulletVelocity * sin(mouseAngle) };
     shape.setPosition(mX, mY);
     shape.setRadius(bulletRadius);
     shape.setFillColor(Color::Green);

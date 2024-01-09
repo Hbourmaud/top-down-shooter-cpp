@@ -52,7 +52,9 @@ void Player::update(GameManager gameManager)
 
 void Player::shoot(GameManager gameManager)
 {
-    Bullet bullet{ x(), y() };
+    float mouseAngle = atan2(Mouse::getPosition(*gameManager.window).y - shape.getPosition().y, Mouse::getPosition(*gameManager.window).x - shape.getPosition().x);
+    
+    Bullet bullet{ x(), y(), mouseAngle };
     bullet.durationTolive = gameManager.clock.getElapsedTime().asMilliseconds() + 3000;
     bullets.push_back(bullet);
 }
