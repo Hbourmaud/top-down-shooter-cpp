@@ -143,6 +143,7 @@
     <ClCompile Include="src\enemy.cpp" />
     <ClCompile Include="src\Source.cpp" />
     <ClCompile Include="src\player.cpp" />
+    <ClCompile Include="src\spawner.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\bullet.h" />
@@ -150,6 +151,7 @@
     <ClInclude Include="include\enemy.h" />
     <ClInclude Include="include\gameManager.h" />
     <ClInclude Include="include\player.h" />
+    <ClInclude Include="include\spawner.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

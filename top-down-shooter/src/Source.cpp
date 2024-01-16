@@ -2,20 +2,25 @@
 #include "player.h"
 #include "gameManager.h"
 #include "enemy.h"
+#include "spawner.h"
 
 using namespace std;
 
 int main() {
 	shared_ptr<GameManager> gameManager{ new GameManager() };
 
-	Player player{ gameManager->windowWidth / 2, gameManager->windowHeight - 50 };
-
-	Enemy enemy{ gameManager->windowWidth / 3, gameManager->windowHeight / 2 };
-
 	if (!gameManager->window)
 	{
 		return 1;
 	}
+
+	Player player{ gameManager->windowWidth / 2, gameManager->windowHeight - 50 };
+
+	Spawner<Enemy> spawnerEnemy{};
+
+	spawnerEnemy.start(gameManager);
+
+	Enemy enemy = *spawnerEnemy.contents[0];
 
 	while (gameManager->window->isOpen())
 	{
@@ -26,7 +31,12 @@ int main() {
 		player.update(gameManager);
 
 		gameManager->window->draw(player.shape);
-		gameManager->window->draw(enemy.shape);
+
+		for (auto i = spawnerEnemy.contents.begin(); i != spawnerEnemy.contents.end();)
+		{
+			gameManager->window->draw((*i)->shape);
+			++i;
+		}
 
 		for (auto i = player.bullets.begin(); i != player.bullets.end();)
 		{
