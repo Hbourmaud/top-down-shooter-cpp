@@ -33,13 +33,23 @@ int main() {
 			if ((*i).durationTolive <= gameManager->clock.getElapsedTime().asMilliseconds())
 			{
 				i = player.bullets.erase(i);
+
+				continue;
 			}
-			else
+
+			(*i).update(gameManager);
+
+			if (gameManager->isIntersecting(enemy, *i))
 			{
-				(*i).update(gameManager);
-				gameManager->window->draw((*i).shape);
-				++i;
+				enemy.life -= i->damage;
+				i = player.bullets.erase(i);
+
+				continue;
 			}
+
+			gameManager->window->draw((*i).shape);
+
+			++i;
 		}
 
 		gameManager->window->display();
