@@ -9,7 +9,7 @@ Bullet::Bullet(float mX, float mY, float mouseAngle)
 	shape.setOrigin(bulletRadius, bulletRadius);
 }
 
-void Bullet::update(GameManager gameManager)
+void Bullet::update(shared_ptr<GameManager> gameManager)
 {
 	shape.move(velocity);
 }

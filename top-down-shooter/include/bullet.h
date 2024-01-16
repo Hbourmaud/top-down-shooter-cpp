@@ -10,7 +10,7 @@ public:
 	float damage{ 5.f }, bulletRadius{ 5.f }, bulletVelocity{ 5.f }, durationTolive{ 0.f };
 	Vector2f velocity;
 
-	void update(GameManager gameManager);
+	void update(shared_ptr<GameManager> gameManager);
 
 	float x();
 	float y();

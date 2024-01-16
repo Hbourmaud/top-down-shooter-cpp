@@ -16,7 +16,7 @@ public:
 	Vector2f velocity;
 	vector<Bullet> bullets;
 
-	void update(GameManager gameManager);
+	void update(shared_ptr<GameManager> gameManager);
 
 	float x();
 	float y();
@@ -26,5 +26,5 @@ public:
 	float bottom();
 
 private:
-	void shoot(GameManager gameManager);
+	void shoot(shared_ptr<GameManager> gameManager);
 };

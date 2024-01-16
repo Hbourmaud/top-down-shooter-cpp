@@ -8,7 +8,7 @@ Player::Player(float mX, float mY)
 	shape.setOrigin(playerRadius, playerRadius);
 }
 
-void Player::update(GameManager gameManager)
+void Player::update(shared_ptr <GameManager> gameManager)
 {
 	shape.move(velocity);
 
@@ -17,7 +17,7 @@ void Player::update(GameManager gameManager)
 		velocity.x = -playerVelocity;
 	}
 	else if (Keyboard::isKeyPressed(Keyboard::Key::Right) &&
-		right() < gameManager.windowWidth)
+		right() < gameManager->windowWidth)
 	{
 		velocity.x = playerVelocity;
 	}
@@ -31,7 +31,7 @@ void Player::update(GameManager gameManager)
 		velocity.y = -playerVelocity;
 	}
 	else if (Keyboard::isKeyPressed(Keyboard::Key::Down) &&
-		bottom() < gameManager.windowHeight)
+		bottom() < gameManager->windowHeight)
 	{
 		velocity.y = playerVelocity;
 	}
@@ -42,20 +42,20 @@ void Player::update(GameManager gameManager)
 
 	if (Keyboard::isKeyPressed(Keyboard::Key::Space))
 	{
-		if (nextShootTime <= gameManager.clock.getElapsedTime().asMilliseconds())
+		if (nextShootTime <= gameManager->clock.getElapsedTime().asMilliseconds())
 		{
 			shoot(gameManager);
-			nextShootTime = gameManager.clock.getElapsedTime().asMilliseconds() + 1000;
+			nextShootTime = gameManager->clock.getElapsedTime().asMilliseconds() + 1000;
 		}
 	}
 }
 
-void Player::shoot(GameManager gameManager)
+void Player::shoot(shared_ptr<GameManager> gameManager)
 {
-	float mouseAngle = atan2(Mouse::getPosition(*gameManager.window).y - shape.getPosition().y, Mouse::getPosition(*gameManager.window).x - shape.getPosition().x);
+	float mouseAngle = atan2(Mouse::getPosition(*gameManager->window).y - shape.getPosition().y, Mouse::getPosition(*gameManager->window).x - shape.getPosition().x);
 
 	Bullet bullet{ x(), y(), mouseAngle };
-	bullet.durationTolive = gameManager.clock.getElapsedTime().asMilliseconds() + 3000;
+	bullet.durationTolive = gameManager->clock.getElapsedTime().asMilliseconds() + 3000;
 	bullets.push_back(bullet);
 }
 
