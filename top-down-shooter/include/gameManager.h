@@ -9,7 +9,7 @@ class GameManager
 public:
 	GameManager();
 
-	float windowWidth{ 800 }, windowHeight{ 600 };
+	float windowWidth{ static_cast<float>(sf::VideoMode::getFullscreenModes()[0].width)}, windowHeight{static_cast<float>(sf::VideoMode::getFullscreenModes()[0].height)};
 
 	sf::RenderWindow* window = nullptr;
 	sf::Clock clock;

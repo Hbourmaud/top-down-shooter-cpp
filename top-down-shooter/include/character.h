@@ -9,7 +9,7 @@ class Character
 {
 public:
 	Character(float mX, float mY);
-	float characterRadius{ 10.f }, characterVelocity{ 0.75f }, life{ 10.f };
+	float characterRadius{ 10.f }, characterVelocity{ 7.5f }, life{ 10.f };
 	CircleShape shape;
 	Vector2f velocity;
 
