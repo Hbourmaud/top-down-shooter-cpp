@@ -1,39 +1,36 @@
 #include "player.h"
 
-Player::Player(float mX, float mY)
+Player::Player(float mX, float mY) : Character(mX, mY)
 {
-	shape.setPosition(mX, mY);
-	shape.setRadius(playerRadius);
 	shape.setFillColor(Color::Red);
-	shape.setOrigin(playerRadius, playerRadius);
 }
 
 void Player::update(shared_ptr <GameManager> gameManager)
 {
-	shape.move(velocity);
+	Character::update(gameManager);
 
-	if (Keyboard::isKeyPressed(Keyboard::Key::Left) && left() > 0)
+	if (Keyboard::isKeyPressed(Keyboard::Key::Q) && left() > 0)
 	{
-		velocity.x = -playerVelocity;
+		velocity.x = -characterVelocity;
 	}
-	else if (Keyboard::isKeyPressed(Keyboard::Key::Right) &&
+	else if (Keyboard::isKeyPressed(Keyboard::Key::D) &&
 		right() < gameManager->windowWidth)
 	{
-		velocity.x = playerVelocity;
+		velocity.x = characterVelocity;
 	}
 	else
 	{
 		velocity.x = 0;
 	}
 
-	if (Keyboard::isKeyPressed(Keyboard::Key::Up) && top() > 0)
+	if (Keyboard::isKeyPressed(Keyboard::Key::Z) && top() > 0)
 	{
-		velocity.y = -playerVelocity;
+		velocity.y = -characterVelocity;
 	}
-	else if (Keyboard::isKeyPressed(Keyboard::Key::Down) &&
+	else if (Keyboard::isKeyPressed(Keyboard::Key::S) &&
 		bottom() < gameManager->windowHeight)
 	{
-		velocity.y = playerVelocity;
+		velocity.y = characterVelocity;
 	}
 	else
 	{
@@ -58,10 +55,3 @@ void Player::shoot(shared_ptr<GameManager> gameManager)
 	bullet.durationTolive = gameManager->clock.getElapsedTime().asMilliseconds() + 3000;
 	bullets.push_back(bullet);
 }
-
-float Player::x() { return shape.getPosition().x; }
-float Player::y() { return shape.getPosition().y; }
-float Player::left() { return x() - shape.getRadius(); }
-float Player::right() { return x() + shape.getRadius(); }
-float Player::top() { return y() - shape.getRadius(); }
-float Player::bottom() { return y() + shape.getRadius(); }

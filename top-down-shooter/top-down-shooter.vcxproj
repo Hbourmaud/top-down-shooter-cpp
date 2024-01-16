@@ -138,6 +138,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\bullet.cpp" />
+    <ClCompile Include="src\character.cpp" />
     <ClCompile Include="src\gameManager.cpp" />
     <ClCompile Include="src\enemy.cpp" />
     <ClCompile Include="src\Source.cpp" />
@@ -145,6 +146,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\bullet.h" />
+    <ClInclude Include="include\character.h" />
     <ClInclude Include="include\enemy.h" />
     <ClInclude Include="include\gameManager.h" />
     <ClInclude Include="include\player.h" />
