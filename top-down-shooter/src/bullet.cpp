@@ -2,16 +2,16 @@
 
 Bullet::Bullet(float mX, float mY, float mouseAngle)
 {
-    velocity = { bulletVelocity * cos(mouseAngle) , bulletVelocity * sin(mouseAngle) };
-    shape.setPosition(mX, mY);
-    shape.setRadius(bulletRadius);
-    shape.setFillColor(Color::Green);
-    shape.setOrigin(bulletRadius, bulletRadius);
+	velocity = { bulletVelocity * cos(mouseAngle) , bulletVelocity * sin(mouseAngle) };
+	shape.setPosition(mX, mY);
+	shape.setRadius(bulletRadius);
+	shape.setFillColor(Color::Green);
+	shape.setOrigin(bulletRadius, bulletRadius);
 }
 
 void Bullet::update(GameManager gameManager)
 {
-    shape.move(velocity);
+	shape.move(velocity);
 }
 
 float Bullet::x() { return shape.getPosition().x; }

@@ -12,7 +12,7 @@ class Player
 public:
 	Player(float mX, float mY);
 	CircleShape shape;
-	float playerRadius{ 10.f }, playerVelocity{ 0.75f }, life{ 10.f }, nextShootTime{0.f};
+	float playerRadius{ 10.f }, playerVelocity{ 0.75f }, life{ 10.f }, nextShootTime{ 0.f };
 	Vector2f velocity;
 	vector<Bullet> bullets;
 
