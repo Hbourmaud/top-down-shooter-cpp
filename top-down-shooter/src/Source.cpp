@@ -16,9 +16,9 @@ int main() {
 
 	Player player{ gameManager->windowWidth / 2, gameManager->windowHeight - 50 };
 
-	Spawner<Enemy> spawnerEnemy{};
+	Spawner<Enemy> spawnerEnemy{gameManager, 5.f, 3};
 
-	spawnerEnemy.start(gameManager);
+	spawnerEnemy.start();
 
 	Enemy enemy = *spawnerEnemy.contents[0];
 
@@ -27,6 +27,8 @@ int main() {
 		gameManager->window->clear(Color::Black);
 
 		if (Keyboard::isKeyPressed(Keyboard::Key::Escape)) break;
+
+		spawnerEnemy.update();
 
 		player.update(gameManager);
 
