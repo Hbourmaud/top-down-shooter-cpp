@@ -16,11 +16,9 @@ int main() {
 
 	Player player{ gameManager->windowWidth / 2, gameManager->windowHeight - 50 };
 
-	Spawner<Enemy> spawnerEnemy{gameManager, 5.f, 3};
+	Spawner<Enemy> spawnerEnemy{ gameManager, 7.f, 3 };
 
 	spawnerEnemy.start();
-
-	Enemy enemy = *spawnerEnemy.contents[0];
 
 	while (gameManager->window->isOpen())
 	{
@@ -34,10 +32,11 @@ int main() {
 
 		gameManager->window->draw(player.shape);
 
-		for (auto i = spawnerEnemy.contents.begin(); i != spawnerEnemy.contents.end();)
+		for (auto enemy = spawnerEnemy.contents.begin(); enemy != spawnerEnemy.contents.end();)
 		{
-			gameManager->window->draw((*i)->shape);
-			++i;
+			gameManager->window->draw((*enemy)->shape);
+
+			++enemy;
 		}
 
 		for (auto i = player.bullets.begin(); i != player.bullets.end();)
@@ -51,17 +50,36 @@ int main() {
 
 			(*i).update(gameManager);
 
-			if (gameManager->isIntersecting(enemy, *i))
-			{
-				enemy.life -= i->damage;
-				i = player.bullets.erase(i);
-
-				continue;
-			}
-
 			gameManager->window->draw((*i).shape);
 
 			++i;
+		}
+
+		for (auto enemy = spawnerEnemy.contents.begin(); enemy != spawnerEnemy.contents.end();)
+		{
+			for (auto i = player.bullets.begin(); i != player.bullets.end();)
+			{
+				if (gameManager->isIntersecting((**enemy), *i))
+				{
+					(*enemy)->life -= i->damage;
+
+					if ((*enemy)->life <= 0.f)
+					{
+						enemy = spawnerEnemy.contents.erase(enemy);
+					}
+
+					i = player.bullets.erase(i);
+
+					break;
+				}
+
+				++i;
+			}
+
+			if (enemy != spawnerEnemy.contents.end())
+			{
+				++enemy;
+			}
 		}
 
 		gameManager->window->display();
