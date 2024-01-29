@@ -10,5 +10,5 @@ public:
 	void update(shared_ptr<GameManager> gameManager);
 
 private:
-
+	void move(shared_ptr<GameManager> gameManager);
 };
