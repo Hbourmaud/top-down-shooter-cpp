@@ -9,10 +9,14 @@ using namespace std;
 int main() {
 	shared_ptr<GameManager> gameManager{ new GameManager() };
 
-	if (!gameManager->window)
+	sf::Font font;
+
+	if (!gameManager->window or !font.loadFromFile(".\\src\\font\\ostrich\\ostrich-regular.ttf"))
 	{
 		return 1;
 	}
+
+	gameManager->scoreText.setFont(font);
 
 	Player player{ gameManager->windowWidth / 2, gameManager->windowHeight - 50 };
 
@@ -35,6 +39,7 @@ int main() {
 		for (auto enemy = spawnerEnemy.contents.begin(); enemy != spawnerEnemy.contents.end();)
 		{
 			gameManager->window->draw((*enemy)->shape);
+			(*enemy)->update(gameManager);
 
 			++enemy;
 		}
@@ -65,6 +70,7 @@ int main() {
 
 					if ((*enemy)->life <= 0.f)
 					{
+						gameManager->score += (*enemy)->scoreValue;
 						enemy = spawnerEnemy.contents.erase(enemy);
 					}
 
@@ -81,6 +87,9 @@ int main() {
 				++enemy;
 			}
 		}
+
+		gameManager->scoreText.setString("Score: " + to_string(gameManager->score));
+		gameManager->window->draw(gameManager->scoreText);
 
 		gameManager->window->display();
 	}
