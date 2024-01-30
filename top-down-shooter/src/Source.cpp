@@ -3,6 +3,7 @@
 #include "gameManager.h"
 #include "enemy.h"
 #include "spawner.h"
+#include "launchMenu.h"
 
 using namespace std;
 
@@ -108,5 +109,18 @@ int startGame()
 }
 
 int main() {
+	LaunchMenu launchMenu{};
+
+	while (launchMenu.window->isOpen())
+	{
+		launchMenu.window->clear(Color::Black);
+
+		if (Keyboard::isKeyPressed(Keyboard::Key::Escape)) std::exit(0);
+
+		launchMenu.update();
+
+		launchMenu.window->display();
+	}
+
 	return startGame();
 }

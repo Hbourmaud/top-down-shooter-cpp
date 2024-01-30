@@ -141,6 +141,7 @@
     <ClCompile Include="src\character.cpp" />
     <ClCompile Include="src\gameManager.cpp" />
     <ClCompile Include="src\enemy.cpp" />
+    <ClCompile Include="src\launchMenu.cpp" />
     <ClCompile Include="src\Source.cpp" />
     <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\spawner.cpp" />
@@ -150,6 +151,7 @@
     <ClInclude Include="include\character.h" />
     <ClInclude Include="include\enemy.h" />
     <ClInclude Include="include\gameManager.h" />
+    <ClInclude Include="include\launchMenu.h" />
     <ClInclude Include="include\player.h" />
     <ClInclude Include="include\spawner.h" />
   </ItemGroup>
