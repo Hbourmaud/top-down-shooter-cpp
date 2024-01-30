@@ -6,19 +6,17 @@
 
 using namespace std;
 
-int main() {
+int startGame()
+{
 	shared_ptr<GameManager> gameManager{ new GameManager() };
 
-	sf::Font font;
-
-	if (!gameManager->window or !font.loadFromFile(".\\src\\font\\ostrich\\ostrich-regular.ttf"))
+	if (!gameManager->window)
 	{
 		return 1;
 	}
 
-	gameManager->scoreText.setFont(font);
-
 	// make position of player in screen range
+
 	Player player{ gameManager->windowWidth / 2, gameManager->windowHeight - 50 };
 
 	Spawner<Enemy> spawnerEnemy{ gameManager, 7.f, 3 };
@@ -65,6 +63,16 @@ int main() {
 
 		for (auto enemy = spawnerEnemy.contents.begin(); enemy != spawnerEnemy.contents.end();)
 		{
+			if (gameManager->isIntersecting(**enemy, player))
+			{
+				--player.life;
+				if (player.life <= 0.f)
+				{
+					gameManager->end();
+					startGame();
+				}
+			}
+
 			for (auto bulletIt = player.bullets.begin(); bulletIt != player.bullets.end();)
 			{
 				if (gameManager->isIntersecting((**enemy), *bulletIt))
@@ -91,10 +99,14 @@ int main() {
 			}
 		}
 
-		gameManager->scoreText.setString("Score: " + to_string(gameManager->score));
-		gameManager->window->draw(gameManager->scoreText);
+		gameManager->infoText.setString("Score: " + to_string(gameManager->score) + "\n HP: "+ to_string(int(player.life)));
+		gameManager->window->draw(gameManager->infoText);
 
 		gameManager->window->display();
 	}
 	return 0;
+}
+
+int main() {
+	return startGame();
 }
