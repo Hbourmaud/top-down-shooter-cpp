@@ -16,6 +16,7 @@ void Enemy::update(shared_ptr<GameManager> gameManager)
 
 void Enemy::move(shared_ptr<GameManager> gameManager)
 {
+	// random value with large range making more non movement
 	switch (rand() % 150)
 	{
 	case 0:

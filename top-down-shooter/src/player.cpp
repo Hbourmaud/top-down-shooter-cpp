@@ -39,6 +39,7 @@ void Player::update(shared_ptr <GameManager> gameManager)
 
 	if (Keyboard::isKeyPressed(Keyboard::Key::Space))
 	{
+		// make interval between shoot
 		if (nextShootTime <= gameManager->clock.getElapsedTime().asMilliseconds())
 		{
 			shoot(gameManager);
@@ -49,6 +50,7 @@ void Player::update(shared_ptr <GameManager> gameManager)
 
 void Player::shoot(shared_ptr<GameManager> gameManager)
 {
+	// mouseAngle use for shooting bullet in mouse direction
 	float mouseAngle = atan2(Mouse::getPosition(*gameManager->window).y - shape.getPosition().y, Mouse::getPosition(*gameManager->window).x - shape.getPosition().x);
 
 	Bullet bullet{ x(), y(), mouseAngle };

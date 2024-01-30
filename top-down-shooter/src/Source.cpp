@@ -18,10 +18,12 @@ int main() {
 
 	gameManager->scoreText.setFont(font);
 
+	// make position of player in screen range
 	Player player{ gameManager->windowWidth / 2, gameManager->windowHeight - 50 };
 
 	Spawner<Enemy> spawnerEnemy{ gameManager, 7.f, 3 };
 
+	// spawning enemy each X times
 	spawnerEnemy.start();
 
 	while (gameManager->window->isOpen())
@@ -46,6 +48,7 @@ int main() {
 
 		for (auto i = player.bullets.begin(); i != player.bullets.end();)
 		{
+			// remove bullet after certain times for avoid too much items stay
 			if ((*i).durationTolive <= gameManager->clock.getElapsedTime().asMilliseconds())
 			{
 				i = player.bullets.erase(i);
@@ -62,11 +65,11 @@ int main() {
 
 		for (auto enemy = spawnerEnemy.contents.begin(); enemy != spawnerEnemy.contents.end();)
 		{
-			for (auto i = player.bullets.begin(); i != player.bullets.end();)
+			for (auto bulletIt = player.bullets.begin(); bulletIt != player.bullets.end();)
 			{
-				if (gameManager->isIntersecting((**enemy), *i))
+				if (gameManager->isIntersecting((**enemy), *bulletIt))
 				{
-					(*enemy)->life -= i->damage;
+					(*enemy)->life -= bulletIt->damage;
 
 					if ((*enemy)->life <= 0.f)
 					{
@@ -74,12 +77,12 @@ int main() {
 						enemy = spawnerEnemy.contents.erase(enemy);
 					}
 
-					i = player.bullets.erase(i);
+					bulletIt = player.bullets.erase(bulletIt);
 
 					break;
 				}
 
-				++i;
+				++bulletIt;
 			}
 
 			if (enemy != spawnerEnemy.contents.end())

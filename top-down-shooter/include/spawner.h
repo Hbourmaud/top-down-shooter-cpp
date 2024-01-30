@@ -4,6 +4,9 @@
 
 using namespace std;
 
+// Because of templating, all the code of spawner are here
+// This class usefull for spawn anything in random position (enemy, items...)
+
 template <class T1>
 class Spawner
 {
@@ -18,7 +21,7 @@ public:
 
 private:
 	float m_duration;
-	int m_nbSpawn;
+	int m_nbSpawn; // number of entity to spawn each duration reached
 	float m_nextWave;
 	shared_ptr<GameManager> m_gameManager;
 

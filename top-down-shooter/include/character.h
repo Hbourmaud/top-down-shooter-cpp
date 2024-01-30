@@ -5,6 +5,7 @@
 using namespace std;
 using namespace sf;
 
+// Base class for enemy, player...
 class Character
 {
 public:
