@@ -1,9 +1,12 @@
 #include "enemy.h"
+#include <vector>
 
 Enemy::Enemy(float mX, float mY) : Character(mX, mY)
 {
+	std::vector<Color> enemyColors = {Color::Yellow, Color::Green, Color::Blue};
+
 	srand((unsigned)time(NULL));
-	shape.setFillColor(Color::Yellow);
+	shape.setFillColor(enemyColors[rand() % 3]);
 	characterVelocity = { 2.f };
 }
 
