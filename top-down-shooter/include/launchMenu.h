@@ -21,6 +21,7 @@ private:
 	Text playText;
 	Text quitText;
 	Text titleText;
+	Text subtitleText;
 
 	void isTextOver(Text& text, function<void(void)> func);
 	void play();

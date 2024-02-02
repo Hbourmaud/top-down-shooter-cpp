@@ -12,6 +12,13 @@ LaunchMenu::LaunchMenu()
 	titleText.setString("Round Rampage");
 	titleText.setPosition(windowWidth / 2 - titleText.getGlobalBounds().width / 2, windowHeight / 3 - 50);
 
+	subtitleText.setFont(font);
+	subtitleText.setCharacterSize(30);
+	subtitleText.setFillColor(sf::Color::Red);
+	subtitleText.setString("Ultimate Edition");
+	subtitleText.setPosition(windowWidth / 2 + 100, windowHeight / 3 + 50);
+	subtitleText.setRotation(340);
+
 	playText.setFont(font);
 	quitText.setFont(font);
 	playText.setCharacterSize(36);
@@ -31,6 +38,7 @@ void LaunchMenu::update()
 	isTextOver(quitText, std::bind(&LaunchMenu::quit, this));
 
 	window->draw(titleText);
+	window->draw(subtitleText);
 	window->draw(playText);
 	window->draw(quitText);
 }
